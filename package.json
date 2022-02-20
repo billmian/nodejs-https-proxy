@@ -1,0 +1,28 @@
+{
+  "name": "nodejs-https-proxy",
+  "version": "1.0.0",
+  "description": "https proxy written by nodejs",
+  "main": "index.js",
+  "scripts": {
+    "createCa":"node createRootCa.js",
+    "start":"node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/billmian/nodejs-https-proxy.git"
+  },
+  "keywords": [
+    "nodejs",
+    "https",
+    "proxy"
+  ],
+  "author": "billmian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/billmian/nodejs-https-proxy/issues"
+  },
+  "homepage": "https://github.com/billmian/nodejs-https-proxy#readme",
+  "dependencies": {
+    "node-forge": "^1.2.1"
+  }
+}
