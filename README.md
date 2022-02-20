@@ -5,6 +5,21 @@
 ## 简介：
 http 和 https 代理，https 没有采用简单的隧道代理，而是使用了自签名证书以获取请求内容。
 
+## 使用：
+1. 运行 npm run createCa
+2. 把 rootCa 目录下的证书导入到系统钥匙串中，并设置为永远信任
+3. 修改 index.js 中的 httpsProxyDomainList ，设置需要代理的 domain
+4. 运行 npm run start
+
+## 功能：
+- [x] http 代理 
+- [x] https 代理 
+- [ ] 配置请求转发
+- [ ] master-slave 多进程并通信
+- [ ] 发 npm 包
+
+
+
 
 ## 实现原理：
 ### 1. 设置系统代理

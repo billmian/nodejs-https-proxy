@@ -1,6 +1,6 @@
 const https = require('https');
 const fs = require('fs');
-const createCertificate = require('./clientCert');
+const createCertificate = require('./createServerCert');
 
 const fakeHttpsServer = (port, domain) => {
   createCertificate(domain);

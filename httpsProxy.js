@@ -8,9 +8,7 @@ const fakeHttpsServer = require('./fakeHttpsServer');
 const openOsProxy = () => {
   exec('networksetup -setsecurewebproxy "Wi-Fi" "127.0.0.1" 8000', {});
 };
-const closeOsProxy = () => {
-  exec('networksetup -setsecurewebproxystate "Wi-Fi" off', {});
-};
+
 
 // 不同域名创建的不同服务器在这里
 const domainPortMap = {};
@@ -33,8 +31,9 @@ const httpsProxy = httpsProxyDomainList => {
     });
 
     const { port = 443, hostname } = url.parse(`${protocol}//${clientRequest.url}`);
-    let targetSocket;
+    console.log('🚀 ~ 监听到了 connect 事件', hostname);
 
+    let targetSocket;
     if (httpsProxyDomainList.includes(hostname)) {
       console.log('这里监听到了', hostname);
       let targetPort;
@@ -91,22 +90,12 @@ const httpsProxy = httpsProxyDomainList => {
 
   server.on('close', () => {
     console.log('这里监测到了退出');
-    closeOsProxy();
   });
 
-  server.on('error', () => {
-    console.log('这里检测到了 error');
-    closeOsProxy();
+  server.on('error', error => {
+    console.log('https proxy 检测到了 error', error);
   });
-
-  // 监听到 ctrl + c 退出
-  process.on('SIGINT', function () {
-    server.close();
-    closeOsProxy();
-    process.exit();
-  });
-
-  process.on('warning', e => console.warn('这里输出 warning 堆栈', e.stack));
 };
+
 
 module.exports = httpsProxy;

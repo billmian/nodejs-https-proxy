@@ -2,10 +2,7 @@ const http = require('http');
 const { exec } = require('child_process');
 
 const openOsProxy = () => {
-  exec('networksetup -setwebproxy "Wi-Fi" "127.0.0.1" 8000', {});
-};
-const closeOsProxy = () => {
-  exec('networksetup -setwebproxystate "Wi-Fi" off', {});
+  exec('networksetup -setwebproxy "Wi-Fi" "127.0.0.1" 8001', {});
 };
 
 const httpProxy = () => {
@@ -39,16 +36,9 @@ const httpProxy = () => {
 
   server.on('error', error => {
     console.log('这里检测到了http server error', error);
-    closeOsProxy();
-  });
-  // 监听到 ctrl + c 退出
-  process.on('SIGINT', function () {
-    server.close();
-    closeOsProxy();
-    process.exit();
   });
 
-  server.listen(8000);
+  server.listen(8001);
 };
 
 module.exports = httpProxy;
